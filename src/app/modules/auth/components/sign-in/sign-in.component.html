@@ -1,0 +1,28 @@
+<section class="loginForm">
+    <div class="container">
+        <h1>Login</h1>
+        <form class="login-form" [formGroup]="loginForm">
+            <div class="input-group">
+                <mat-form-field class="full-width">
+                    <mat-label>User Name</mat-label>
+                    <input matInput placeholder="Enter your username" formControlName="UserName">
+                </mat-form-field>
+                <div *ngIf="loginForm.controls.UserName.invalid && loginForm.controls.UserName.touched">
+                    <div class="requiredValidation" *ngIf="loginForm.controls.UserName.errors?.required">Username is required.</div>
+                </div>
+            </div>
+            <div class="input-group">
+                <mat-form-field class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" placeholder="Enter your password" formControlName="Password">
+                </mat-form-field>
+                <div>
+                    <div class="requiredValidation" *ngIf="loginForm.controls.Password.hasError('required') && (loginForm.controls.Password.dirty || loginForm.controls.Password.touched)">Password is required.</div>
+                    <div class="maxLengthValidation" *ngIf="loginForm.controls.Password.hasError('minlength') && (loginForm.controls.Password.dirty || loginForm.controls.Password.touched)">Password must be at least 6 characters long.</div>    
+                    <div class="patternValidation" *ngIf="loginForm.controls.Password.hasError('pattern') && (loginForm.controls.Password.dirty || loginForm.controls.Password.touched)">Password must contain at least one uppercase letter, one lowercase letter, and one number.</div>    
+                </div>
+            </div>
+            <button class="login-btn" (click)="onSubmit()">Login</button>
+        </form>
+    </div>
+</section>

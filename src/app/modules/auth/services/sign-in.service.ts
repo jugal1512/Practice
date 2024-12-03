@@ -13,7 +13,6 @@ export class SignInService {
 
   login(loginData:ILogin) : Observable<any>
   {
-    debugger
     return this.http.post<ILogin>(`${this.loginURl}/Login`,loginData);
   }
 }

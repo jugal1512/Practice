@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ILogin } from '../../../models/auth.modals';
 import { SignInService } from '../../services/sign-in.service';
+import { LocalStorageService } from '../../../../shared/services/local-storage.service';
+import { NotificationService } from '../../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,7 +16,7 @@ export class SignInComponent implements OnInit{
   loginData : ILogin | undefined;
   user : any;
   loginForm : FormGroup | any;
-  constructor(private fb:FormBuilder,private signInService:SignInService){
+  constructor(private fb:FormBuilder,private signInService:SignInService,private localStorageService:LocalStorageService,private notificationService:NotificationService){
 
   }
 
@@ -33,8 +35,12 @@ export class SignInComponent implements OnInit{
       const password = this.loginForm.get('Password').value;
       this.loginData = this.convertToLoginModal(userName,password);
       this.signInService.login(this.loginData).subscribe((res:any)=>{
-        this.user = res;  
-        this.resetForm();
+        this.user = res;
+        this.localStorageService.setItem('user',this.user);
+        this.notificationService.success("Login Successfully.");
+      },
+      (error)=>{
+        this.notificationService.error(error.status);
       });
     }
     else

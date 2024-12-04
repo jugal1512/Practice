@@ -1,0 +1,42 @@
+.sidenav-container {
+    height: 100%;
+}
+
+.sidenav {
+    width: 250px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3f51b5;
+    color: white;
+}
+
+.content {
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    width: 250px;
+    height: 200px;
+}
+
+.charts {
+    display: flex;
+    gap: 20px;
+}
+
+.chart-card {
+    width: 100%;
+}

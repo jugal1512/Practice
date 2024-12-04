@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ILogin } from '../../models/auth.modals';
 import { Observable } from 'rxjs';
 import { endpoints } from '../../../../endpoints/endpoints';
+import { ILogin } from '../models/ILogin';
 
 @Injectable({
   providedIn: 'root'

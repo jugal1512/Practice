@@ -1,0 +1,45 @@
+<section class="loginForm">
+    <div class="container">
+      <div class="form-header">
+        <h1>Sign Up</h1>
+        <p>Register your account</p>
+      </div>
+  
+      <form class="login-form" [formGroup]="registerForm">
+        <div class="input-container">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Username" formControlName="UserName" />
+            <mat-icon matPrefix>person</mat-icon>
+          </mat-form-field>
+          <div *ngIf="registerForm.controls.UserName.invalid && registerForm.controls.UserName.touched">
+            <div class="error" *ngIf="registerForm.controls.UserName.errors?.required">Username is required.</div>
+          </div>
+        </div>
+        <div class="input-container">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Email" formControlName="Email" />
+              <mat-icon matPrefix>person</mat-icon>
+            </mat-form-field>
+            <div *ngIf="registerForm.controls.Email.invalid && registerForm.controls.Email.touched">
+              <div class="error" *ngIf="registerForm.controls.Email.hasError('required') && (registerForm.controls.Email.dirty || registerForm.controls.Email.touched)">Email is required.</div>
+              <div class="error" *ngIf="registerForm.controls.Email.hasError('email') && (registerForm.controls.Email.dirty || registerForm.controls.Email.touched)">Enter valid email.</div>    
+            </div>
+          </div>
+        <div class="input-container">
+          <mat-form-field class="full-width">
+            <input matInput type="password" placeholder="Password" formControlName="Password" />
+            <mat-icon matPrefix>lock</mat-icon>
+          </mat-form-field>
+          <div *ngIf="registerForm.controls.Password.invalid && registerForm.controls.Password.touched">
+            <div class="error" *ngIf="registerForm.controls.Password.hasError('required') && (registerForm.controls.Password.dirty || registerForm.controls.Password.touched)">Password is required.</div>
+            <div class="error" *ngIf="registerForm.controls.Password.hasError('minlength') && (registerForm.controls.Password.dirty || registerForm.controls.Password.touched)">Password must be at least 6 characters long.</div>    
+            <div class="error" *ngIf="registerForm.controls.Password.hasError('pattern') && (registerForm.controls.Password.dirty || registerForm.controls.Password.touched)">Password must contain at least one uppercase letter, one lowercase letter, and one number.</div>    
+          </div>
+        </div>
+        <button class="login-btn" (click)="onSubmit()">Register</button> 
+        <div class="footer">
+          <p>Already have an account? <a [routerLink]="['/']">Sign In</a></p>
+        </div>
+      </form>
+    </div>
+</section>

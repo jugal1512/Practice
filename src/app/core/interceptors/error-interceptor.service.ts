@@ -24,7 +24,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
               this.notificationSetvice.error(`${error.status} ${error.message}`);
               break;
             case 404:
-              this.notificationSetvice.error(`${error.status} Data already Exists.`);
+              this.notificationSetvice.error(`${error.status} Data not found.`);
               break;
             default:
               break;

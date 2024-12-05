@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SignInService } from '../../services/sign-in.service';
+import { AuthService } from '../../services/auth.service'; 
 import { LocalStorageService } from '../../../../shared/services/local-storage.service';
 import { NotificationService } from '../../../../shared/services/notification.service';
 import { Router } from '@angular/router';
-import { ILogin } from '../../models/ILogin';
+import { ILogin } from '../../models/auth.models';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,14 +16,12 @@ export class SignInComponent implements OnInit {
   roleName = 'Admin';
   loginData: ILogin | undefined;
   token: any;
-  token1: any;
   loginForm: FormGroup | any;
   constructor(private fb: FormBuilder,
-    private signInService: SignInService,
+    private authService: AuthService,
     private localStorageService: LocalStorageService,
     private notificationService: NotificationService,
     private router: Router,
-    private localstorageService: LocalStorageService
   ) {
 
   }
@@ -40,7 +38,7 @@ export class SignInComponent implements OnInit {
       const userName = this.loginForm.get('UserName').value;
       const password = this.loginForm.get('Password').value;
       this.loginData = this.convertToLoginModal(userName, password);
-      this.signInService.login(this.loginData).subscribe({
+      this.authService.login(this.loginData).subscribe({
         next: (res: any) => {
           this.token = res.token;
           this.localStorageService.setItem('token', this.token);
